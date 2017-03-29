@@ -3,67 +3,51 @@ title: "長庚大學 大數據分析方法 作業三"
 output: github_document
 ---
 
-## 作業說明 （繳交時請直接刪除這個章節）
 
-作業目的：練習初級爬蟲，並將爬蟲結果整理成資料框data.frame
-
-依下列指示，完成網站內文分析：
-
-- 爬取指定網站內容
-    - 學號結尾 0,4,8:[Ptt Tech_Job 版](https://www.ptt.cc/bbs/Tech_Job/index.html)
-    - 學號結尾 1,5,9:[Ptt NBA 版](https://www.ptt.cc/bbs/NBA/index.html)
-    - 學號結尾 2,6:[Ptt LoL 版](https://www.ptt.cc/bbs/LoL/index.html)
-    - 學號結尾 3,7:[Ptt movie 版](https://www.ptt.cc/bbs/movie/index.html)
-    
-- 試著爬出**至少100篇**文章（`30pt`）的**標題**、**推文數**與**作者ID**（各`10pt`）
-    - 資料框欄位名稱：
-        - **標題**：Title
-        - **推文數**：PushNum
-        - **作者ID**：Author
-    - 一頁只有20篇，該怎麼辦？
-        - 提示：使用for + rbind()將分批爬取出的資料結合
-        - 範例：dataframeAll<-rbind(dataframe1,dataframe2) 
-        - 參考：[6.6 資料組合](http://yijutseng.github.io/DataScienceRBook/manipulation.html#section-6.6)
-    
-- 將爬取出的資料輸出至Markdown報告中（`10pt`）
-    - 使用knitr::kable(資料框物件)整理輸出
-    
-- 用文字搭配程式碼解釋爬蟲結果 
-    - 共爬出幾篇文章標題？（程式碼與文字解釋各`5pt`）
-        - dim(), nrow(), str()皆可
-    - 哪個作者文章數最多？（程式碼與文字解釋各`5pt`）
-        - table()
-    - 其他爬蟲結果解釋（`10pt`）
-        - 試著找出有趣的現象，不一定要用程式碼搭配解釋，也可只用文字
 
     
 
 ## 網站資料爬取
 ```{r}
-#這是R Code Chunk
-library(rvest) ##第一次使用要先安裝 install.packages("rvest")
-##read_html
-##html_nodes
-##html_text
+library(rvest)
+PTTNBA<-"https://www.ptt.cc/bbs/NBA/index.html"
+for(n in 1:6){
+  pttContent<-read_html(PTTNBA)
+  pageup <- pttContent %>% html_nodes(".btn-group a") %>% html_attr("href")
+  post_title <- pttContent %>% html_nodes(".title") %>% html_text()
+  post_push <- pttContent %>% html_nodes(".nrec") %>% html_text()
+  post_author <- pttContent %>% html_nodes(".author") %>% html_text()
+  PttNBA_posts <- data.frame(Title = post_title,
+                               PushNum = post_push,
+                               Author = post_author)
+  PTTNBA <- paste("https://www.ptt.cc",pageup[4], sep="")
+  nam <- paste("PttNBA_posts",n,sep="")
+  assign(nam, PttNBA_posts)
+}
+
+PttNBA_posts_All <- rbind(PttNBA_posts1,PttNBA_posts2,PttNBA_posts3,PttNBA_posts4,PttNBA_posts5,PttNBA_posts6)
 ```
 
 ## 爬蟲結果呈現
 ```{r}
-#這是R Code Chunk
-knitr::kable(iris) ##請將iris取代為上個步驟中產生的爬蟲資料資料框
+knitr::kable(
+  PttNBA_posts_All[c("Title", "PushNum", "Author")]
+)
+
 ```
 
 ## 解釋爬蟲結果 
 ```{r}
-#這是R Code Chunk
-```
+str(PttNBA_posts_All)
+table(PttNBA_posts_All$Author)
 
-解釋解釋解釋解釋
+
+```
+總共117篇文章
+名字為Rombo的總共發了18篇是最多文章的作者
 
 ```{r}
-#這是R Code Chunk
+table(PttNBA_posts_All$Title)
 ```
-
-解釋解釋解釋解釋
-
-人工結論與解釋解釋解釋解釋解釋解釋解釋
+按照標題看起來，目前大多數的文章討論比賽的比數或狀況 
+最常被討論的球星是詹姆士

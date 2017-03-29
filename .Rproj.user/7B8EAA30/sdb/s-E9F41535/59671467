@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(rvest)\nPTTNBA<-\"https://www.ptt.cc/bbs/NBA/index4602.html\"\nfor(n in 1:6)\npttContent<-read_html(PTTNBA)\npost_title <- pttContent %>% html_nodes(\".title\") %>% html_text()\npost_push <-prrContent %>% html_nodes(\".\") %>% html_text()",
+    "created" : 1490117629886.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2985249038",
+    "id" : "59671467",
+    "lastKnownWriteTime" : 1490118322,
+    "last_content_update" : 1490531459164,
+    "path" : "C:/Users/Henry/Desktop/try.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

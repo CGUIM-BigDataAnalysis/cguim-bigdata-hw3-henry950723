@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(rvest)\nPttMovie<-\"https://www.ptt.cc/bbs/movie/index.html\"\nfor(n in 1:6){\n  PttContent <- read_html(PttMovie)\n  pageup <- PttContent %>% html_nodes(\".btn-group a\") %>% html_attr(\"href\")\n  post_title <- PttContent %>% html_nodes(\".title\") %>% html_text()\n  post_push <- PttContent %>% html_nodes(\".nrec\") %>% html_text()\n  post_author <- PttContent %>% html_nodes(\".author\") %>% html_text()\n  PttMovie_posts <- data.frame(Title = post_title,\n                               PushNum = post_push,\n                               Author = post_author)\n  PttMovie <- paste(\"https://www.ptt.cc\",pageup[4], sep=\"\")\n  nam <- paste(\"PttMovie_posts\",n,sep=\"\")\n  assign(nam, PttMovie_posts)\n}\n\nPttMovie_posts_All <- rbind(PttMovie_posts1,PttMovie_posts2,PttMovie_posts3,PttMovie_posts4,PttMovie_posts5,PttMovie_posts6)\n\nknitr::kable(\n  PttMovie_posts_All[c(\"Title\", \"PushNum\", \"Author\")]\n)\na<-table(PttMovie_posts_All$Author)\n",
+    "created" : 1490117672082.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4192704524",
+    "id" : "4977648C",
+    "lastKnownWriteTime" : 1490117640,
+    "last_content_update" : 1490117640,
+    "path" : "C:/Users/Henry/Downloads/Hw3.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

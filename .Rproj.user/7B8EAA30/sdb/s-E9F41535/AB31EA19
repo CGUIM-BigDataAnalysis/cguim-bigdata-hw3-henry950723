@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"長庚大學 大數據分析方法 作業三\"\noutput: github_document\n---\n\n## 作業說明 （繳交時請直接刪除這個章節）\n\n作業目的：練習初級爬蟲，並將爬蟲結果整理成資料框data.frame\n\n依下列指示，完成網站內文分析：\n\n- 爬取指定網站內容\n    - 學號結尾 0,4,8:[Ptt Tech_Job 版](https://www.ptt.cc/bbs/Tech_Job/index.html)\n    - 學號結尾 1,5,9:[Ptt NBA 版](https://www.ptt.cc/bbs/NBA/index.html)\n    - 學號結尾 2,6:[Ptt LoL 版](https://www.ptt.cc/bbs/LoL/index.html)\n    - 學號結尾 3,7:[Ptt movie 版](https://www.ptt.cc/bbs/movie/index.html)\n    \n- 試著爬出**至少100篇**文章（`30pt`）的**標題**、**推文數**與**作者ID**（各`10pt`）\n    - 資料框欄位名稱：\n        - **標題**：Title\n        - **推文數**：PushNum\n        - **作者ID**：Author\n    - 一頁只有20篇，該怎麼辦？\n        - 提示：使用for + rbind()將分批爬取出的資料結合\n        - 範例：dataframeAll<-rbind(dataframe1,dataframe2) \n        - 參考：[6.6 資料組合](http://yijutseng.github.io/DataScienceRBook/manipulation.html#section-6.6)\n    \n- 將爬取出的資料輸出至Markdown報告中（`10pt`）\n    - 使用knitr::kable(資料框物件)整理輸出\n    \n- 用文字搭配程式碼解釋爬蟲結果 \n    - 共爬出幾篇文章標題？（程式碼與文字解釋各`5pt`）\n        - dim(), nrow(), str()皆可\n    - 哪個作者文章數最多？（程式碼與文字解釋各`5pt`）\n        - table()\n    - 其他爬蟲結果解釋（`10pt`）\n        - 試著找出有趣的現象，不一定要用程式碼搭配解釋，也可只用文字\n\n    \n\n## 網站資料爬取\n```{r}\n#這是R Code Chunk\nlibrary(rvest) ##第一次使用要先安裝 install.packages(\"rvest\")\n##read_html\n##html_nodes\n##html_text\n```\n\n## 爬蟲結果呈現\n```{r}\n#這是R Code Chunk\nknitr::kable(iris) ##請將iris取代為上個步驟中產生的爬蟲資料資料框\n```\n\n## 解釋爬蟲結果 \n```{r}\n#這是R Code Chunk\n```\n\n解釋解釋解釋解釋\n\n```{r}\n#這是R Code Chunk\n```\n\n解釋解釋解釋解釋\n\n人工結論與解釋解釋解釋解釋解釋解釋解釋\n",
+    "created" : 1490525451977.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1711005345",
+    "id" : "AB31EA19",
+    "lastKnownWriteTime" : 1490114379,
+    "last_content_update" : 1490114379,
+    "path" : "C:/Users/Henry/Desktop/cguim-bigdata-hw3-henry950723/README.Rmd",
+    "project_path" : "README.Rmd",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
